@@ -1,7 +1,11 @@
 export const profile = {
   name: "Rogie Josue Laura",
-  title:
-    "Web & Mobile Application Development | Data Entry & AI Evaluation | Web Research | IT",
+  roles: [
+    "Web & Mobile Application Development",
+    "Data Entry & AI Evaluation",
+    "Web Research",
+    "IT / Web Development",
+  ],
   tagline:
     "Detail-oriented IT professional combining software development with data management, AI evaluation, and quality assurance.",
   location: "Philippines",

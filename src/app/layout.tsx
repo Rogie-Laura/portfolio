@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${profile.name} | ${profile.title}`,
+  title: `${profile.name} | ${profile.roles[0]}`,
   description: profile.tagline,
   keywords: [
     profile.name,
@@ -23,6 +23,8 @@ export const metadata: Metadata = {
     "Web Research",
     "IT Professional",
     "Web Development",
+    "Flutter",
+    "Mobile Application Development",
     "Philippines",
   ],
   authors: [{ name: profile.name }],

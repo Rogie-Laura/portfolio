@@ -91,9 +91,16 @@ export function BentoPortfolio() {
               <h1 className="animate-gradient-text mt-4 bg-gradient-to-r from-emerald-300 via-cyan-300 to-emerald-300 bg-clip-text text-2xl font-bold tracking-tight text-transparent">
                 {profile.name}
               </h1>
-              <p className="mt-2 text-sm font-medium leading-relaxed text-emerald-300">
-                {profile.title}
-              </p>
+              <div className="mt-3 flex flex-wrap justify-center gap-1.5">
+                {profile.roles.map((role) => (
+                  <span
+                    key={role}
+                    className="rounded-full border border-emerald-500/25 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-medium leading-snug text-emerald-300 transition-colors hover:border-emerald-400/40 hover:bg-emerald-500/15"
+                  >
+                    {role}
+                  </span>
+                ))}
+              </div>
               <p className="mt-3 text-sm leading-relaxed text-slate-400">
                 {profile.tagline}
               </p>
