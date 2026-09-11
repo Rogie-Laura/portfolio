@@ -15,13 +15,16 @@ import { profile } from "@/data/profile";
 function Card({
   children,
   className = "",
+  delay = 0,
 }: {
   children: React.ReactNode;
   className?: string;
+  delay?: number;
 }) {
   return (
     <div
-      className={`rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-emerald-500/25 ${className}`}
+      className={`card-glow animate-fade-up rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/25 hover:shadow-xl hover:shadow-emerald-500/5 ${className}`}
+      style={{ animationDelay: `${delay}ms` }}
     >
       {children}
     </div>
@@ -37,7 +40,9 @@ function CardTitle({
 }) {
   return (
     <h2 className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-emerald-400">
-      {icon}
+      <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/10">
+        {icon}
+      </span>
       {children}
     </h2>
   );
@@ -48,28 +53,42 @@ export function BentoPortfolio() {
 
   return (
     <div className="relative min-h-screen overflow-hidden px-4 py-6 sm:px-6 lg:px-10">
-      {/* Background glow */}
+      {/* Animated background */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-40 -top-32 h-96 w-96 rounded-full bg-emerald-500/10 blur-3xl" />
-        <div className="absolute -bottom-40 -right-32 h-[28rem] w-[28rem] rounded-full bg-cyan-500/10 blur-3xl" />
+        <div className="animate-blob absolute -left-40 -top-32 h-96 w-96 rounded-full bg-emerald-500/15 blur-3xl" />
+        <div className="animate-blob-alt absolute -bottom-40 -right-32 h-[28rem] w-[28rem] rounded-full bg-cyan-500/15 blur-3xl" />
+        <div className="animate-blob-alt absolute left-1/2 top-1/3 h-72 w-72 -translate-x-1/2 rounded-full bg-emerald-400/[0.07] blur-3xl" />
+        {/* Subtle grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgb(255 255 255 / 0.4) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / 0.4) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
       </div>
 
       <div className="relative mx-auto max-w-6xl">
         <div className="grid gap-4 lg:grid-cols-12">
           {/* Profile / Hero card */}
-          <Card className="lg:col-span-4 lg:row-span-2 flex flex-col bg-gradient-to-br from-emerald-500/[0.08] to-cyan-500/[0.04]">
+          <Card
+            delay={0}
+            className="flex flex-col bg-gradient-to-br from-emerald-500/[0.08] to-cyan-500/[0.04] lg:col-span-4 lg:row-span-2"
+          >
             <div className="flex flex-col items-center text-center">
-              <div className="relative h-28 w-28 overflow-hidden rounded-full border-4 border-emerald-500/30 shadow-lg shadow-emerald-500/10">
+              <div className="animate-ring-pulse relative h-28 w-28 overflow-hidden rounded-full border-4 border-emerald-500/40 shadow-lg shadow-emerald-500/20 transition-transform duration-300 hover:scale-105">
                 <Image
                   src={profile.photoUrl}
                   alt={profile.name}
                   fill
+                  sizes="112px"
                   className="object-cover"
                   priority
                 />
               </div>
 
-              <h1 className="mt-4 text-2xl font-bold tracking-tight text-white">
+              <h1 className="animate-gradient-text mt-4 bg-gradient-to-r from-emerald-300 via-cyan-300 to-emerald-300 bg-clip-text text-2xl font-bold tracking-tight text-transparent">
                 {profile.name}
               </h1>
               <p className="mt-2 text-sm font-medium leading-relaxed text-emerald-300">
@@ -102,8 +121,9 @@ export function BentoPortfolio() {
             </div>
 
             <div className="mt-5 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.06] p-4 text-center">
-              <p className="text-xs font-semibold uppercase tracking-wider text-emerald-300">
-                {profile.availability.type}
+              <p className="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-wider text-emerald-300">
+                <span className="animate-dot-pulse h-2 w-2 rounded-full bg-emerald-400" />
+                Available — {profile.availability.type}
               </p>
               <p className="mt-1.5 text-xs leading-relaxed text-slate-400">
                 {profile.availability.roles}
@@ -113,7 +133,7 @@ export function BentoPortfolio() {
             <div className="mt-auto flex flex-col gap-2.5 pt-5">
               <a
                 href={`mailto:${profile.email}`}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 transition-colors hover:bg-emerald-400"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-lg shadow-emerald-500/25 transition-all duration-300 hover:scale-[1.03] hover:bg-emerald-400 hover:shadow-emerald-400/40"
               >
                 <Mail className="h-4 w-4" />
                 Contact Me
@@ -121,7 +141,7 @@ export function BentoPortfolio() {
               <a
                 href={profile.resumeUrl}
                 download
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:scale-[1.03] hover:border-emerald-500/30 hover:bg-white/10"
               >
                 <Download className="h-4 w-4" />
                 Download Resume
@@ -130,7 +150,7 @@ export function BentoPortfolio() {
           </Card>
 
           {/* About */}
-          <Card className="lg:col-span-8">
+          <Card delay={100} className="lg:col-span-8">
             <CardTitle icon={<Sparkles className="h-3.5 w-3.5" />}>
               Profile
             </CardTitle>
@@ -142,7 +162,7 @@ export function BentoPortfolio() {
           </Card>
 
           {/* Skills */}
-          <Card className="lg:col-span-8">
+          <Card delay={200} className="lg:col-span-8">
             <CardTitle icon={<Wrench className="h-3.5 w-3.5" />}>
               Skills
             </CardTitle>
@@ -156,7 +176,7 @@ export function BentoPortfolio() {
                     {group.items.map((skill) => (
                       <li
                         key={skill}
-                        className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs text-slate-300"
+                        className="cursor-default rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs text-slate-300 transition-all duration-200 hover:scale-105 hover:border-emerald-500/40 hover:bg-emerald-500/10 hover:text-emerald-300"
                       >
                         {skill}
                       </li>
@@ -168,7 +188,7 @@ export function BentoPortfolio() {
           </Card>
 
           {/* Experience */}
-          <Card className="lg:col-span-7">
+          <Card delay={300} className="lg:col-span-7">
             <CardTitle icon={<Briefcase className="h-3.5 w-3.5" />}>
               Experience
             </CardTitle>
@@ -187,7 +207,7 @@ export function BentoPortfolio() {
                   {job.highlights.map((item) => (
                     <li
                       key={item}
-                      className="flex gap-2 text-sm leading-snug text-slate-400"
+                      className="flex gap-2 text-sm leading-snug text-slate-400 transition-colors hover:text-slate-300"
                     >
                       <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
                       {item}
@@ -199,7 +219,7 @@ export function BentoPortfolio() {
           </Card>
 
           {/* Data & AI Capabilities */}
-          <Card className="lg:col-span-5">
+          <Card delay={400} className="lg:col-span-5">
             <CardTitle icon={<BrainCircuit className="h-3.5 w-3.5" />}>
               Data & AI Capabilities
             </CardTitle>
@@ -207,7 +227,7 @@ export function BentoPortfolio() {
               {profile.dataAiCapabilities.map((item) => (
                 <li
                   key={item}
-                  className="flex gap-2 text-sm leading-snug text-slate-400"
+                  className="flex gap-2 text-sm leading-snug text-slate-400 transition-colors hover:text-slate-300"
                 >
                   <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-400" />
                   {item}
@@ -217,17 +237,18 @@ export function BentoPortfolio() {
           </Card>
 
           {/* Projects */}
-          <Card className="lg:col-span-12">
+          <Card delay={500} className="lg:col-span-12">
             <CardTitle icon={<FolderKanban className="h-3.5 w-3.5" />}>
               Selected Projects
             </CardTitle>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-              {profile.projects.map((project) => (
+              {profile.projects.map((project, index) => (
                 <article
                   key={project.title}
-                  className="group flex flex-col rounded-xl border border-white/10 bg-white/[0.03] p-4 transition-all hover:-translate-y-0.5 hover:border-emerald-500/25 hover:bg-white/[0.05]"
+                  className="animate-fade-up group flex flex-col rounded-xl border border-white/10 bg-white/[0.03] p-4 transition-all duration-300 hover:-translate-y-1.5 hover:border-emerald-500/30 hover:bg-emerald-500/[0.05] hover:shadow-lg hover:shadow-emerald-500/10"
+                  style={{ animationDelay: `${600 + index * 80}ms` }}
                 >
-                  <h3 className="text-sm font-semibold text-white">
+                  <h3 className="text-sm font-semibold text-white transition-colors group-hover:text-emerald-300">
                     {project.title}
                   </h3>
                   {project.subtitle && (
@@ -242,7 +263,7 @@ export function BentoPortfolio() {
                     {project.tech.map((tech) => (
                       <span
                         key={tech}
-                        className="rounded bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-300"
+                        className="rounded bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-300 transition-colors group-hover:bg-emerald-500/20"
                       >
                         {tech}
                       </span>
@@ -254,7 +275,10 @@ export function BentoPortfolio() {
           </Card>
         </div>
 
-        <footer className="mt-6 flex flex-col items-center justify-between gap-2 text-xs text-slate-500 sm:flex-row">
+        <footer
+          className="animate-fade-up mt-6 flex flex-col items-center justify-between gap-2 text-xs text-slate-500 sm:flex-row"
+          style={{ animationDelay: "1000ms" }}
+        >
           <p>
             © {year} {profile.name}. All rights reserved.
           </p>
