@@ -127,14 +127,31 @@ export function BentoPortfolio() {
               </a>
             </div>
 
-            <div className="mt-5 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.06] p-4 text-center">
+            <div className="mt-5 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.06] p-4">
               <p className="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-wider text-emerald-300">
-                <span className="animate-dot-pulse h-2 w-2 rounded-full bg-emerald-400" />
-                Available — {profile.availability.type}
+                <span className="animate-dot-pulse h-2 w-2 shrink-0 rounded-full bg-emerald-400" />
+                Available
               </p>
-              <p className="mt-1.5 text-xs leading-relaxed text-slate-400">
-                {profile.availability.roles}
-              </p>
+              <div className="mt-2.5 flex flex-wrap justify-center gap-1.5">
+                {profile.availability.type.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-md border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-300"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-3 flex flex-wrap justify-center gap-1.5">
+                {profile.availability.roles.map((role) => (
+                  <span
+                    key={role}
+                    className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] text-slate-400"
+                  >
+                    {role}
+                  </span>
+                ))}
+              </div>
             </div>
 
             <div className="mt-auto flex flex-col gap-2.5 pt-5">

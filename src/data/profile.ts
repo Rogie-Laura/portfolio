@@ -131,9 +131,14 @@ export const profile = {
     "Follow detailed rubrics, compare outputs, organize spreadsheet data, and perform online research and verification.",
   ],
   availability: {
-    type: "Part-time / Project-based / Remote",
-    roles:
-      "Data Entry • AI Evaluation • Web Research • Non-Voice VA • Web & Mobile App Development",
+    type: ["Part-time", "Project-based", "Remote"],
+    roles: [
+      "Data Entry",
+      "AI Evaluation",
+      "Web Research",
+      "Non-Voice VA",
+      "Web & Mobile App Development",
+    ],
   },
 };
 
