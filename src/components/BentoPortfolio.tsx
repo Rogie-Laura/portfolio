@@ -13,7 +13,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { profile } from "@/data/profile";
-import { PublicReviews } from "./PublicReviews";
+import { ProfileRating } from "./ProfileRating";
 
 function Card({
   children,
@@ -157,6 +157,8 @@ export function BentoPortfolio() {
                 {profile.phone}
               </a>
             </div>
+
+            <ProfileRating />
 
             <div className="mt-5 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.06] p-4">
               <p className="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-wider text-emerald-300">
@@ -370,9 +372,6 @@ export function BentoPortfolio() {
             </div>
           </Card>
 
-          <div className="lg:col-span-12">
-            <PublicReviews />
-          </div>
         </div>
 
         <footer
