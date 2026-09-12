@@ -171,10 +171,7 @@ export function BentoPortfolio() {
               </div>
             </div>
 
-            <SidebarActions
-              email={profile.email}
-              resumeUrl={profile.resumeUrl}
-            />
+            <SidebarActions resumeUrl={profile.resumeUrl} />
           </Card>
 
           {/* Main content — Profile, Education + Certs side by side, Skills full width */}

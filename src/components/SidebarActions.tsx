@@ -1,32 +1,59 @@
 "use client";
 
 import { useState } from "react";
-import { Download, Mail, Send, X } from "lucide-react";
+import { Download, Loader2, Mail, Send, X } from "lucide-react";
 import { Modal } from "./Modal";
 
 type SidebarActionsProps = {
-  email: string;
   resumeUrl: string;
 };
 
-export function SidebarActions({
-  email,
-  resumeUrl,
-}: SidebarActionsProps) {
+export function SidebarActions({ resumeUrl }: SidebarActionsProps) {
   const [contactOpen, setContactOpen] = useState(false);
-  const [form, setForm] = useState({ name: "", subject: "", message: "" });
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
 
-  function handleSubmit(event: React.FormEvent) {
-    event.preventDefault();
-    const body = encodeURIComponent(
-      `From: ${form.name}\n\n${form.message}`,
-    );
-    const subject = encodeURIComponent(
-      form.subject || "Portfolio Inquiry",
-    );
-    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+  function closeContact() {
     setContactOpen(false);
-    setForm({ name: "", subject: "", message: "" });
+    setError("");
+    setSuccess("");
+  }
+
+  async function handleSubmit(event: React.FormEvent) {
+    event.preventDefault();
+    setError("");
+    setSuccess("");
+    setSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.error ?? "Could not send message. Please try again.");
+        return;
+      }
+
+      setSuccess("Message sent! Salamat — babasahin ko ito at babalikan kita.");
+      setForm({ name: "", email: "", subject: "", message: "" });
+
+      setTimeout(() => closeContact(), 1500);
+    } catch {
+      setError("Could not send message. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -51,12 +78,12 @@ export function SidebarActions({
         </a>
       </div>
 
-      <Modal open={contactOpen} onClose={() => setContactOpen(false)} labelId="contact-title">
+      <Modal open={contactOpen} onClose={closeContact} labelId="contact-title">
         <div className="relative max-h-[min(90vh,640px)] overflow-y-auto rounded-2xl border border-white/10 bg-slate-900 p-5 shadow-2xl shadow-emerald-500/10">
           <button
             type="button"
             aria-label="Close"
-            onClick={() => setContactOpen(false)}
+            onClick={closeContact}
             className="absolute right-3 top-3 z-10 rounded-lg p-1 text-slate-400 transition-colors hover:bg-white/10 hover:text-white"
           >
             <X className="h-4 w-4" />
@@ -69,7 +96,7 @@ export function SidebarActions({
             Contact Me
           </h3>
           <p className="mt-2 text-xs text-slate-400">
-            Fill out the form below to send a message.
+            Send a message — saved securely so I can review and reply.
           </p>
 
           <form onSubmit={handleSubmit} className="mt-4 space-y-3">
@@ -81,8 +108,22 @@ export function SidebarActions({
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 required
-                className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition-colors focus:border-emerald-500/40"
+                disabled={submitting}
+                className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition-colors focus:border-emerald-500/40 disabled:opacity-50"
                 placeholder="Juan Dela Cruz"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-xs text-slate-400">
+                Your email (optional, for reply)
+              </label>
+              <input
+                type="email"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                disabled={submitting}
+                className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition-colors focus:border-emerald-500/40 disabled:opacity-50"
+                placeholder="you@email.com"
               />
             </div>
             <div>
@@ -94,7 +135,8 @@ export function SidebarActions({
                 onChange={(e) =>
                   setForm({ ...form, subject: e.target.value })
                 }
-                className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition-colors focus:border-emerald-500/40"
+                disabled={submitting}
+                className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition-colors focus:border-emerald-500/40 disabled:opacity-50"
                 placeholder="Project inquiry"
               />
             </div>
@@ -108,17 +150,32 @@ export function SidebarActions({
                   setForm({ ...form, message: e.target.value })
                 }
                 required
+                disabled={submitting}
                 rows={4}
-                className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition-colors focus:border-emerald-500/40"
+                className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white outline-none transition-colors focus:border-emerald-500/40 disabled:opacity-50"
                 placeholder="Write your message..."
               />
             </div>
+
+            {error && <p className="text-sm text-red-400">{error}</p>}
+            {success && <p className="text-sm text-emerald-400">{success}</p>}
+
             <button
               type="submit"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 transition-colors hover:bg-emerald-400"
+              disabled={submitting}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 transition-colors hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              <Send className="h-4 w-4" />
-              Send Message
+              {submitting ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  <Send className="h-4 w-4" />
+                  Send Message
+                </>
+              )}
             </button>
           </form>
         </div>
