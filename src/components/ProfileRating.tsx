@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Star, X } from "lucide-react";
+import { Modal } from "./Modal";
 
 function StarDisplay({
   rating,
@@ -110,27 +111,6 @@ export function ProfileRating() {
     loadStats();
   }, []);
 
-  useEffect(() => {
-    if (!modalOpen) return;
-
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        setModalOpen(false);
-        setSelectedRating(0);
-        setError("");
-        setSuccess("");
-      }
-    }
-
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKeyDown);
-
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [modalOpen]);
-
   function closeModal() {
     setModalOpen(false);
     setSelectedRating(0);
@@ -205,60 +185,51 @@ export function ProfileRating() {
         )}
       </div>
 
-      {modalOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="rate-me-title"
-        >
+      <Modal
+        open={modalOpen}
+        onClose={closeModal}
+        labelId="rate-me-title"
+        maxWidth="max-w-xs"
+      >
+        <div className="relative rounded-2xl border border-white/10 bg-slate-900 p-5 shadow-2xl shadow-emerald-500/10">
           <button
             type="button"
             aria-label="Close"
-            className="absolute inset-0 bg-slate-950/70 backdrop-blur-sm"
             onClick={closeModal}
-          />
+            className="absolute right-3 top-3 rounded-lg p-1 text-slate-400 transition-colors hover:bg-white/10 hover:text-white"
+          >
+            <X className="h-4 w-4" />
+          </button>
 
-          <div className="relative w-full max-w-xs animate-fade-up rounded-2xl border border-white/10 bg-slate-900 p-5 shadow-2xl shadow-emerald-500/10">
-            <button
-              type="button"
-              aria-label="Close"
-              onClick={closeModal}
-              className="absolute right-3 top-3 rounded-lg p-1 text-slate-400 transition-colors hover:bg-white/10 hover:text-white"
+          <div className="text-center">
+            <h3
+              id="rate-me-title"
+              className="text-sm font-semibold uppercase tracking-[0.15em] text-emerald-400"
             >
-              <X className="h-4 w-4" />
-            </button>
+              Rate Me
+            </h3>
+            <p className="mt-2 text-xs text-slate-400">
+              Portfolio visitor rating — piliin ang stars (1–5)
+            </p>
 
-            <div className="text-center">
-              <h3
-                id="rate-me-title"
-                className="text-sm font-semibold uppercase tracking-[0.15em] text-emerald-400"
-              >
-                Rate Me
-              </h3>
-              <p className="mt-2 text-xs text-slate-400">
-                Portfolio visitor rating — piliin ang stars (1–5)
-              </p>
-
-              <div className="mt-5">
-                <StarPicker
-                  value={selectedRating}
-                  onChange={handleRate}
-                  disabled={submitting}
-                />
-              </div>
-
-              {error && <p className="mt-3 text-xs text-red-400">{error}</p>}
-              {success && (
-                <p className="mt-3 text-xs text-emerald-400">{success}</p>
-              )}
-              {submitting && (
-                <p className="mt-3 text-xs text-slate-400">Saving...</p>
-              )}
+            <div className="mt-5">
+              <StarPicker
+                value={selectedRating}
+                onChange={handleRate}
+                disabled={submitting}
+              />
             </div>
+
+            {error && <p className="mt-3 text-xs text-red-400">{error}</p>}
+            {success && (
+              <p className="mt-3 text-xs text-emerald-400">{success}</p>
+            )}
+            {submitting && (
+              <p className="mt-3 text-xs text-slate-400">Saving...</p>
+            )}
           </div>
         </div>
-      )}
+      </Modal>
     </>
   );
 }

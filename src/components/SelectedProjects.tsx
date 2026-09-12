@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   FolderKanban,
   Layers,
@@ -11,6 +11,7 @@ import {
   X,
 } from "lucide-react";
 import type { Project } from "@/data/profile";
+import { Modal } from "./Modal";
 
 function CategoryBadge({ category }: { category: Project["category"] }) {
   const config = {
@@ -52,35 +53,14 @@ function ProjectDetailModal({
   project: Project;
   onClose: () => void;
 }) {
-  useEffect(() => {
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") onClose();
-    }
-
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKeyDown);
-
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [onClose]);
-
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby={`project-${project.id}-title`}
+    <Modal
+      open
+      onClose={onClose}
+      labelId={`project-${project.id}-title`}
+      maxWidth="max-w-2xl"
     >
-      <button
-        type="button"
-        aria-label="Close"
-        className="absolute inset-0 bg-slate-950/75 backdrop-blur-sm"
-        onClick={onClose}
-      />
-
-      <div className="relative flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-900 shadow-2xl shadow-emerald-500/10">
+      <div className="flex max-h-[min(90vh,800px)] w-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-900 shadow-2xl shadow-emerald-500/10">
         <div className="flex items-start justify-between gap-4 border-b border-white/10 px-5 py-4">
           <div>
             <div className="mb-2">
@@ -193,7 +173,7 @@ function ProjectDetailModal({
           </section>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }
 
