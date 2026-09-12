@@ -196,90 +196,91 @@ export function BentoPortfolio() {
             </div>
           </Card>
 
-          {/* Profile */}
-          <Card delay={100} className="lg:col-span-8">
-            <CardTitle icon={<Sparkles className="h-3.5 w-3.5" />}>
-              Profile
-            </CardTitle>
-            <div className="space-y-3 text-sm leading-relaxed text-slate-400">
-              {profile.about.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
-          </Card>
+          {/* Main content — Profile, Education + Certs side by side, Skills full width */}
+          <div className="flex flex-col gap-4 lg:col-span-8">
+            <Card delay={100}>
+              <CardTitle icon={<Sparkles className="h-3.5 w-3.5" />}>
+                Profile
+              </CardTitle>
+              <div className="space-y-3 text-sm leading-relaxed text-slate-400">
+                {profile.about.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </Card>
 
-          {/* Educational Background */}
-          <Card delay={150} className="lg:col-span-8">
-            <CardTitle icon={<GraduationCap className="h-3.5 w-3.5" />}>
-              Educational Background
-            </CardTitle>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {profile.education.map((item) => (
-                <div
-                  key={`${item.degree}-${item.school}`}
-                  className="rounded-xl border border-white/10 bg-white/[0.03] p-3 transition-colors hover:border-emerald-500/20"
-                >
-                  <p className="text-xs font-semibold text-emerald-400">
-                    {item.period}
-                  </p>
-                  <p className="mt-1 text-sm font-medium leading-snug text-white">
-                    {item.degree}
-                  </p>
-                  <p className="mt-1 text-xs leading-snug text-slate-400">
-                    {item.school}
-                  </p>
+            <div className="grid gap-4 md:grid-cols-2">
+              <Card delay={150} className="h-full">
+                <CardTitle icon={<GraduationCap className="h-3.5 w-3.5" />}>
+                  Educational Background
+                </CardTitle>
+                <div className="space-y-2">
+                  {profile.education.map((item) => (
+                    <div
+                      key={`${item.degree}-${item.school}`}
+                      className="rounded-xl border border-white/10 bg-white/[0.03] p-3 transition-colors hover:border-emerald-500/20"
+                    >
+                      <p className="text-xs font-semibold text-emerald-400">
+                        {item.period}
+                      </p>
+                      <p className="mt-1 text-sm font-medium leading-snug text-white">
+                        {item.degree}
+                      </p>
+                      <p className="mt-1 text-xs leading-snug text-slate-400">
+                        {item.school}
+                      </p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </Card>
+              </Card>
 
-          {/* Certificates and Trainings */}
-          <Card delay={200} className="lg:col-span-8">
-            <CardTitle icon={<Award className="h-3.5 w-3.5" />}>
-              Certificates and Trainings
-            </CardTitle>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {profile.certificates.map((item) => (
-                <div
-                  key={`${item.title}-${item.institution}`}
-                  className="rounded-xl border border-white/10 bg-white/[0.03] p-3 transition-colors hover:border-emerald-500/20"
-                >
-                  <p className="text-sm font-medium leading-snug text-white">
-                    {item.title}
-                  </p>
-                  <p className="mt-1 text-xs text-slate-400">
-                    {item.institution}
-                  </p>
+              <Card delay={200} className="h-full">
+                <CardTitle icon={<Award className="h-3.5 w-3.5" />}>
+                  Certificates and Trainings
+                </CardTitle>
+                <div className="space-y-2">
+                  {profile.certificates.map((item) => (
+                    <div
+                      key={`${item.title}-${item.institution}`}
+                      className="rounded-xl border border-white/10 bg-white/[0.03] p-3 transition-colors hover:border-emerald-500/20"
+                    >
+                      <p className="text-sm font-medium leading-snug text-white">
+                        {item.title}
+                      </p>
+                      <p className="mt-1 text-xs text-slate-400">
+                        {item.institution}
+                      </p>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </Card>
             </div>
-          </Card>
 
-          {/* Skills */}
-          <Card delay={250} className="lg:col-span-8">
-            <CardTitle icon={<Wrench className="h-3.5 w-3.5" />}>
-              Skills
-            </CardTitle>
-            <div className="grid gap-4 sm:grid-cols-3">
-              {profile.skills.map((group) => (
-                <div key={group.category}>
-                  <h3 className="mb-2 text-xs font-semibold text-slate-300">
-                    {group.category}
-                  </h3>
-                  <ul className="flex flex-wrap gap-1.5">
-                    {group.items.map((skill) => (
-                      <li
-                        key={skill}
-                        className="cursor-default rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs text-slate-300 transition-all duration-200 hover:scale-105 hover:border-emerald-500/40 hover:bg-emerald-500/10 hover:text-emerald-300"
-                      >
-                        {skill}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </Card>
+            <Card delay={250}>
+              <CardTitle icon={<Wrench className="h-3.5 w-3.5" />}>
+                Skills
+              </CardTitle>
+              <div className="grid gap-4 sm:grid-cols-3">
+                {profile.skills.map((group) => (
+                  <div key={group.category}>
+                    <h3 className="mb-2 text-xs font-semibold text-slate-300">
+                      {group.category}
+                    </h3>
+                    <ul className="flex flex-wrap gap-1.5">
+                      {group.items.map((skill) => (
+                        <li
+                          key={skill}
+                          className="cursor-default rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs text-slate-300 transition-all duration-200 hover:scale-105 hover:border-emerald-500/40 hover:bg-emerald-500/10 hover:text-emerald-300"
+                        >
+                          {skill}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </div>
 
           {/* Experience */}
           <Card delay={300} className="lg:col-span-7">
