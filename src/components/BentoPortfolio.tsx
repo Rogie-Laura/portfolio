@@ -31,6 +31,38 @@ function Card({
   );
 }
 
+function isLongLabel(label: string) {
+  return label.length > 26;
+}
+
+function RoleBadges({
+  items,
+  variant = "primary",
+}: {
+  items: string[];
+  variant?: "primary" | "muted";
+}) {
+  const primaryClass =
+    "rounded-full border border-emerald-500/25 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-medium leading-snug text-emerald-300 transition-colors hover:border-emerald-400/40 hover:bg-emerald-500/15";
+  const mutedClass =
+    "rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] text-slate-400";
+
+  return (
+    <div className="grid w-full grid-cols-2 gap-1.5">
+      {items.map((item) => (
+        <span
+          key={item}
+          className={`text-center ${isLongLabel(item) ? "col-span-2" : ""} ${
+            variant === "primary" ? primaryClass : mutedClass
+          }`}
+        >
+          {item}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 function CardTitle({
   icon,
   children,
@@ -91,15 +123,8 @@ export function BentoPortfolio() {
               <h1 className="animate-gradient-text mt-4 bg-gradient-to-r from-emerald-300 via-cyan-300 to-emerald-300 bg-clip-text text-2xl font-bold tracking-tight text-transparent">
                 {profile.name}
               </h1>
-              <div className="mt-3 flex flex-wrap justify-center gap-1.5">
-                {profile.roles.map((role) => (
-                  <span
-                    key={role}
-                    className="rounded-full border border-emerald-500/25 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-medium leading-snug text-emerald-300 transition-colors hover:border-emerald-400/40 hover:bg-emerald-500/15"
-                  >
-                    {role}
-                  </span>
-                ))}
+              <div className="mt-3 w-full px-1">
+                <RoleBadges items={profile.roles} />
               </div>
               <p className="mt-3 text-sm leading-relaxed text-slate-400">
                 {profile.tagline}
@@ -132,25 +157,18 @@ export function BentoPortfolio() {
                 <span className="animate-dot-pulse h-2 w-2 shrink-0 rounded-full bg-emerald-400" />
                 Available
               </p>
-              <div className="mt-2.5 flex flex-wrap justify-center gap-1.5">
+              <div className="mt-2.5 grid grid-cols-3 gap-1.5">
                 {profile.availability.type.map((item) => (
                   <span
                     key={item}
-                    className="rounded-md border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-300"
+                    className="rounded-md border border-emerald-500/20 bg-emerald-500/10 px-1.5 py-1 text-center text-[10px] font-semibold uppercase tracking-wide text-emerald-300"
                   >
                     {item}
                   </span>
                 ))}
               </div>
-              <div className="mt-3 flex flex-wrap justify-center gap-1.5">
-                {profile.availability.roles.map((role) => (
-                  <span
-                    key={role}
-                    className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] text-slate-400"
-                  >
-                    {role}
-                  </span>
-                ))}
+              <div className="mt-3">
+                <RoleBadges items={profile.availability.roles} variant="muted" />
               </div>
             </div>
 
