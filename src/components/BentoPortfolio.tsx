@@ -107,19 +107,19 @@ export function BentoPortfolio() {
       </div>
 
       <div className="relative mx-auto max-w-6xl">
-        <div className="grid gap-4 lg:grid-cols-12">
+        <div className="grid gap-4 lg:grid-cols-12 lg:items-stretch">
           {/* Left sidebar — profile only */}
           <Card
             delay={0}
-            className="flex flex-col self-start bg-gradient-to-br from-emerald-500/[0.08] to-cyan-500/[0.04] lg:col-span-4"
+            className="flex h-full flex-col bg-gradient-to-br from-emerald-500/[0.08] to-cyan-500/[0.04] lg:col-span-4"
           >
             <div className="flex flex-col items-center text-center">
-              <div className="animate-ring-pulse relative h-28 w-28 overflow-hidden rounded-full border-4 border-emerald-500/40 shadow-lg shadow-emerald-500/20 transition-transform duration-300 hover:scale-105">
+              <div className="animate-ring-pulse relative h-36 w-36 overflow-hidden rounded-full border-4 border-emerald-500/40 shadow-lg shadow-emerald-500/20 transition-transform duration-300 hover:scale-105 sm:h-40 sm:w-40">
                 <Image
                   src={profile.photoUrl}
                   alt={profile.name}
                   fill
-                  sizes="112px"
+                  sizes="160px"
                   className="object-cover"
                   priority
                 />
@@ -197,7 +197,7 @@ export function BentoPortfolio() {
           </Card>
 
           {/* Main content — Profile, Education + Certs side by side, Skills full width */}
-          <div className="flex flex-col gap-4 lg:col-span-8">
+          <div className="flex h-full flex-col gap-4 lg:col-span-8">
             <Card delay={100}>
               <CardTitle icon={<Sparkles className="h-3.5 w-3.5" />}>
                 Profile
