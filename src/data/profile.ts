@@ -1,13 +1,11 @@
 export const profile = {
   name: "Rogie Josue Laura",
-  roles: [
-    "Web & Mobile Application Development",
-    "Data Entry & AI Evaluation",
-    "Web Research",
-    "IT / Web Development",
-    "Web & Mobile Application Testing",
-    "QA Evaluation",
-    "Bug Reporting",
+  roleRows: [
+    ["Web & Mobile Application Development"],
+    ["Data Entry & AI Evaluation", "Web Research"],
+    ["IT / Web Development", "QA Evaluation"],
+    ["Web & Mobile Application Testing"],
+    ["Database Management"],
   ],
   tagline:
     "Detail-oriented IT professional combining software development with data management, AI evaluation, and quality assurance.",
@@ -41,7 +39,6 @@ export const profile = {
         "Quality Checking",
         "Web & Mobile Application Testing",
         "QA Evaluation",
-        "Bug Reporting",
       ],
     },
     {
@@ -131,6 +128,25 @@ export const profile = {
       ],
     },
   ],
+  education: [
+    {
+      period: "2000 — 2002",
+      degree: "Associate in Computer Technology",
+    },
+    {
+      period: "2002 — 2005",
+      degree: "BS in Computer Engineering",
+    },
+    {
+      period: "2006 — 2010",
+      degree: "BS in Computer Science",
+    },
+  ],
+  certificates: [
+    "Basic and Advance Java Programming",
+    "Computer Ethical Hacking and Penetration Testing",
+    "Certified Google IT Support",
+  ],
   dataAiCapabilities: [
     "Review structured and unstructured information against defined requirements.",
     "Identify inconsistencies, missing information, formatting issues, and possible factual errors.",
@@ -139,15 +155,11 @@ export const profile = {
   ],
   availability: {
     type: ["Part-time", "Project-based", "Remote"],
-    roles: [
-      "Data Entry",
-      "AI Evaluation",
-      "Web Research",
-      "Database Management",
-      "Web & Mobile App Development",
-      "Web & Mobile Application Testing",
-      "QA Evaluation",
-      "Bug Reporting",
+    roleRows: [
+      ["Data Entry", "AI Evaluation"],
+      ["Web Research", "Database Management"],
+      ["Web & Mobile App Development"],
+      ["Web & Mobile Application Testing", "QA Evaluation"],
     ],
   },
 };

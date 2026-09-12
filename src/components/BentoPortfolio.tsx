@@ -1,9 +1,11 @@
 import Image from "next/image";
 import {
+  Award,
   BrainCircuit,
   Briefcase,
   Download,
   FolderKanban,
+  GraduationCap,
   Mail,
   MapPin,
   Phone,
@@ -31,15 +33,11 @@ function Card({
   );
 }
 
-function isLongLabel(label: string) {
-  return label.length > 26;
-}
-
 function RoleBadges({
-  items,
+  rows,
   variant = "primary",
 }: {
-  items: string[];
+  rows: string[][];
   variant?: "primary" | "muted";
 }) {
   const primaryClass =
@@ -48,16 +46,23 @@ function RoleBadges({
     "rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] text-slate-400";
 
   return (
-    <div className="grid w-full grid-cols-2 gap-1.5">
-      {items.map((item) => (
-        <span
-          key={item}
-          className={`text-center ${isLongLabel(item) ? "col-span-2" : ""} ${
-            variant === "primary" ? primaryClass : mutedClass
-          }`}
+    <div className="flex w-full flex-col gap-1.5">
+      {rows.map((row) => (
+        <div
+          key={row.join("-")}
+          className={`grid gap-1.5 ${row.length === 1 ? "grid-cols-1" : "grid-cols-2"}`}
         >
-          {item}
-        </span>
+          {row.map((item) => (
+            <span
+              key={item}
+              className={`text-center ${
+                variant === "primary" ? primaryClass : mutedClass
+              }`}
+            >
+              {item}
+            </span>
+          ))}
+        </div>
       ))}
     </div>
   );
@@ -124,7 +129,7 @@ export function BentoPortfolio() {
                 {profile.name}
               </h1>
               <div className="mt-3 w-full px-1">
-                <RoleBadges items={profile.roles} />
+                <RoleBadges rows={profile.roleRows} />
               </div>
               <p className="mt-3 text-sm leading-relaxed text-slate-400">
                 {profile.tagline}
@@ -168,7 +173,7 @@ export function BentoPortfolio() {
                 ))}
               </div>
               <div className="mt-3">
-                <RoleBadges items={profile.availability.roles} variant="muted" />
+                <RoleBadges rows={profile.availability.roleRows} variant="muted" />
               </div>
             </div>
 
@@ -278,8 +283,48 @@ export function BentoPortfolio() {
             </ul>
           </Card>
 
+          {/* Education */}
+          <Card delay={550} className="lg:col-span-6">
+            <CardTitle icon={<GraduationCap className="h-3.5 w-3.5" />}>
+              Educational Background
+            </CardTitle>
+            <div className="space-y-3">
+              {profile.education.map((item) => (
+                <div
+                  key={item.degree}
+                  className="rounded-xl border border-white/10 bg-white/[0.03] p-3 transition-colors hover:border-emerald-500/20"
+                >
+                  <p className="text-xs font-semibold text-emerald-400">
+                    {item.period}
+                  </p>
+                  <p className="mt-1 text-sm font-medium text-white">
+                    {item.degree}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          {/* Certificates */}
+          <Card delay={600} className="lg:col-span-6">
+            <CardTitle icon={<Award className="h-3.5 w-3.5" />}>
+              Certificates and Trainings
+            </CardTitle>
+            <ul className="space-y-2">
+              {profile.certificates.map((item) => (
+                <li
+                  key={item}
+                  className="flex gap-2 rounded-xl border border-white/10 bg-white/[0.03] p-3 text-sm leading-snug text-slate-400 transition-colors hover:border-emerald-500/20 hover:text-slate-300"
+                >
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </Card>
+
           {/* Projects */}
-          <Card delay={500} className="lg:col-span-12">
+          <Card delay={650} className="lg:col-span-12">
             <CardTitle icon={<FolderKanban className="h-3.5 w-3.5" />}>
               Selected Projects
             </CardTitle>
