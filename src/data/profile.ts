@@ -31,7 +31,6 @@ export const profile = {
   resumeUrl: "/resume.docx",
   photoUrl: "/profile.png",
   social: {
-    github: "https://github.com/Rogie-Laura",
     linkedin: "",
   },
   about: [

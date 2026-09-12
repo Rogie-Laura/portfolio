@@ -174,7 +174,6 @@ export function BentoPortfolio() {
             <SidebarActions
               email={profile.email}
               resumeUrl={profile.resumeUrl}
-              githubUrl={profile.social.github || undefined}
             />
           </Card>
 
