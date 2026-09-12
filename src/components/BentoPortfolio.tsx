@@ -108,7 +108,9 @@ export function BentoPortfolio() {
       </div>
 
       <div className="relative mx-auto max-w-6xl">
-        <div className="grid gap-4 lg:grid-cols-12 lg:items-stretch">
+        <div className="grid gap-4 lg:grid-cols-12">
+          {/* Top row — sidebar and main content aligned at the bottom */}
+          <div className="grid gap-4 lg:col-span-12 lg:grid lg:grid-cols-12 lg:items-stretch">
           {/* Left sidebar — profile only */}
           <Card
             delay={0}
@@ -200,8 +202,8 @@ export function BentoPortfolio() {
           </Card>
 
           {/* Main content — Profile, Education + Certs side by side, Skills full width */}
-          <div className="flex h-full flex-col gap-4 lg:col-span-8">
-            <Card delay={100}>
+          <div className="flex h-full min-h-0 flex-col gap-4 lg:col-span-8">
+            <Card delay={100} className="shrink-0">
               <CardTitle icon={<Sparkles className="h-3.5 w-3.5" />}>
                 Profile
               </CardTitle>
@@ -212,7 +214,7 @@ export function BentoPortfolio() {
               </div>
             </Card>
 
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid shrink-0 gap-4 md:grid-cols-2">
               <Card delay={150} className="h-full">
                 <CardTitle icon={<GraduationCap className="h-3.5 w-3.5" />}>
                   Educational Background
@@ -259,11 +261,11 @@ export function BentoPortfolio() {
               </Card>
             </div>
 
-            <Card delay={250}>
+            <Card delay={250} className="flex min-h-0 flex-1 flex-col">
               <CardTitle icon={<Wrench className="h-3.5 w-3.5" />}>
                 Skills
               </CardTitle>
-              <div className="grid gap-4 sm:grid-cols-3">
+              <div className="grid flex-1 content-start gap-4 sm:grid-cols-3">
                 {profile.skills.map((group) => (
                   <div key={group.category}>
                     <h3 className="mb-2 text-xs font-semibold text-slate-300">
@@ -283,6 +285,7 @@ export function BentoPortfolio() {
                 ))}
               </div>
             </Card>
+          </div>
           </div>
 
           {/* Experience */}
