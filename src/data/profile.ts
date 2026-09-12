@@ -66,42 +66,6 @@ export const profile = {
       ],
     },
   ],
-  // Self-assessed proficiency — edit ratings from 1 to 5
-  skillRatings: [
-    {
-      category: "Development",
-      items: [
-        { name: "Next.js / React / TypeScript", rating: 4 },
-        { name: "Flutter", rating: 3 },
-        { name: "JavaScript / HTML / CSS", rating: 4 },
-        { name: "Firebase / Firestore", rating: 4 },
-        { name: "Supabase / PostgreSQL", rating: 4 },
-        { name: "PHP / MySQL", rating: 4 },
-      ],
-    },
-    {
-      category: "Data & QA",
-      items: [
-        { name: "Data Entry & Processing", rating: 5 },
-        { name: "Database Management", rating: 4 },
-        { name: "AI Output Evaluation", rating: 4 },
-        { name: "Web & Mobile App Testing", rating: 4 },
-        { name: "QA Evaluation", rating: 4 },
-        { name: "Web Research", rating: 5 },
-      ],
-    },
-    {
-      category: "Tools & Soft Skills",
-      items: [
-        { name: "Excel / Google Sheets", rating: 5 },
-        { name: "GitHub / Vercel", rating: 4 },
-        { name: "Microsoft Office", rating: 5 },
-        { name: "Attention to Detail", rating: 5 },
-        { name: "Independent Work", rating: 5 },
-        { name: "Fast Learner", rating: 5 },
-      ],
-    },
-  ],
   projects: [
     {
       title: "CFRAME",
