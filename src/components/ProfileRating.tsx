@@ -182,13 +182,16 @@ export function ProfileRating() {
               rating={stats.total > 0 ? stats.average : 0}
               size="md"
             />
-            <p className="mt-1.5 text-xl font-bold text-white">
+            <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-emerald-400/80">
+              Portfolio Visitor Rating
+            </p>
+            <p className="mt-1 text-xl font-bold text-white">
               {stats.total > 0 ? stats.average.toFixed(1) : "—"}
             </p>
             <p className="mt-0.5 text-[11px] text-slate-400">
               {stats.total > 0
-                ? `${stats.totalStars} stars · ${stats.total} rating${stats.total === 1 ? "" : "s"}`
-                : "No ratings yet"}
+                ? `${stats.total} visitor rating${stats.total === 1 ? "" : "s"}`
+                : "No visitor ratings yet"}
             </p>
             <button
               type="button"
@@ -234,7 +237,7 @@ export function ProfileRating() {
                 Rate Me
               </h3>
               <p className="mt-2 text-xs text-slate-400">
-                Piliin ang stars (1–5)
+                Portfolio visitor rating — piliin ang stars (1–5)
               </p>
 
               <div className="mt-5">

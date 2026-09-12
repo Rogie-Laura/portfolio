@@ -1,3 +1,19 @@
+export type Project = {
+  id: string;
+  title: string;
+  subtitle: string;
+  shortDescription: string;
+  overview: string;
+  purpose?: string;
+  features: string[];
+  role: string;
+  technology: string[];
+  category: "web" | "mobile" | "fullstack";
+  screenshots?: string[];
+  liveUrl?: string;
+  githubUrl?: string;
+};
+
 export const profile = {
   name: "Rogie Josue Laura",
   roleRows: [
@@ -12,11 +28,10 @@ export const profile = {
   location: "Philippines",
   timezone: "UTC+8 — Philippine Standard Time",
   email: "Rogie.josue.laura.30211111@gmail.com",
-  phone: "09294426037",
   resumeUrl: "/resume.docx",
   photoUrl: "/profile.png",
   social: {
-    github: "",
+    github: "https://github.com/Rogie-Laura",
     linkedin: "",
   },
   about: [
@@ -45,7 +60,7 @@ export const profile = {
       category: "Technical",
       items: [
         "Next.js / React / TypeScript",
-        "Flutter",
+        "Flutter / Dart",
         "JavaScript / HTML / CSS",
         "Firebase / Firestore",
         "Supabase / PostgreSQL",
@@ -68,51 +83,193 @@ export const profile = {
   ],
   projects: [
     {
+      id: "cframe",
       title: "CFRAME",
-      subtitle: "Custodial Facility, Records Admission and Monitoring Ecosystem",
-      description:
-        "Custodial records, admission, monitoring, and disposition management system for structured facility operations.",
-      tech: ["Next.js", "Firebase", "Records Management"],
-      liveUrl: "",
-      githubUrl: "",
+      subtitle:
+        "Custodial Facility, Records Admission and Monitoring Ecosystem",
+      shortDescription:
+        "Web-based custodial records and monitoring system for Persons Under Police Custody (PUPC).",
+      overview:
+        "CFRAME is a web-based custodial records and monitoring system designed to digitize and centralize the management of Persons Under Police Custody (PUPC). It provides an organized platform for recording admission details, custody information, case-related records, monitoring activities, and release or transfer status.",
+      purpose:
+        "The system was developed to improve the accuracy, accessibility, accountability, and organization of custodial records while reducing reliance on manual and paper-based processes.",
+      features: [
+        "PUPC registration and digital profiling",
+        "Admission and custody records",
+        "Case and offense information",
+        "Custodial monitoring",
+        "Release and disposition status",
+        "Transfer records",
+        "Searchable digital records",
+        "User access and administrative controls",
+        "Records history and monitoring",
+        "Dashboard and reporting",
+      ],
+      role: "System concept development, database and workflow design, UI/UX planning, full-stack development, testing, and implementation.",
+      technology: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Supabase",
+        "PostgreSQL",
+      ],
+      category: "web",
     },
     {
+      id: "prisms",
       title: "PRISMS",
-      subtitle: "Property & Inventory Records System",
-      description:
-        "Centralized property and inventory records system with dashboards, audit trails, reporting, and document management.",
-      tech: ["React", "Supabase", "PostgreSQL"],
-      liveUrl: "",
-      githubUrl: "",
+      subtitle: "Property Records Information Support Management System",
+      shortDescription:
+        "Centralized, QR-enabled property and inventory records management system.",
+      overview:
+        "PRISMS is a centralized, QR-enabled property and inventory records management system developed to improve the recording, monitoring, inspection, and accountability of organizational assets. The platform consolidates property information into a searchable digital database and provides tools for inventory management, inspection, reporting, and audit activities.",
+      features: [
+        "Centralized property database",
+        "QR-enabled asset identification",
+        "Vehicle, firearm, equipment, and facility records",
+        "Accountable officer assignment",
+        "Inventory and inspection monitoring",
+        "Audit trail",
+        "Request-for-deletion workflow",
+        "Archives and record restoration",
+        "Role-based user access",
+        "Reports and dashboard analytics",
+        "Database backup and restoration",
+      ],
+      role: "System design, database architecture, workflow development, frontend/backend development, testing, and continuous improvement.",
+      technology: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Supabase",
+        "PostgreSQL",
+        "QR Technology",
+      ],
+      category: "web",
     },
     {
+      id: "pro4a-command",
       title: "PRO4A COMMAND",
-      subtitle: "Operations Monitoring Dashboard",
-      description:
-        "Centralized operations monitoring dashboard for accomplishments, analytics, and management reporting.",
-      tech: ["Next.js", "Dashboard", "Analytics"],
-      liveUrl: "",
-      githubUrl: "",
+      subtitle: "Centralized Operations Monitoring and Management Dashboard",
+      shortDescription:
+        "Centralized operations monitoring platform for accomplishments, analytics, and decision support.",
+      overview:
+        "PRO4A COMMAND is a centralized operations monitoring and management platform designed to consolidate operational accomplishments and provide management with timely information for monitoring, analysis, reporting, and decision support. Instead of relying on multiple disconnected reports, authorized units can submit information through a centralized system where data can be consolidated and presented through dashboards and analytical reports.",
+      features: [
+        "Centralized accomplishment reporting",
+        "Unit/station data submission",
+        "Operational monitoring dashboard",
+        "Consolidated reports",
+        "Performance monitoring",
+        "Data filtering and analytics",
+        "Management-level statistics",
+        "Role-based access",
+        "Historical records",
+        "Decision-support information",
+      ],
+      role: "Project concept development, system architecture, database design, dashboard development, workflow implementation, testing, and deployment support.",
+      technology: [
+        "Next.js",
+        "React",
+        "Firebase",
+        "Firestore",
+        "Dashboard Analytics",
+        "Vercel",
+      ],
+      category: "web",
     },
     {
+      id: "patrollers",
       title: "PATROLLERS",
-      subtitle: "GPS Activity Tracking System",
-      description:
-        "GPS-enabled activity tracking and real-time operations monitoring system for field operations.",
-      tech: ["JavaScript", "GPS", "Real-time Monitoring"],
-      liveUrl: "",
-      githubUrl: "",
+      subtitle:
+        "Police Activity Tracking and Realtime Operations Live Locator and Enhanced Response System",
+      shortDescription:
+        "Location-enabled operational monitoring platform with real-time patrol visibility and coordinated response support.",
+      overview:
+        "PATROLLERS is a location-enabled operational monitoring and response platform designed to provide real-time visibility of deployed mobile patrol personnel and support coordinated response operations. The system combines mobile location reporting with a centralized monitoring interface, allowing authorized personnel to view field resources and operational activities through an interactive map.",
+      features: [
+        "Mobile-based GPS location reporting",
+        "Real-time patrol monitoring",
+        "Interactive map visualization",
+        "Field personnel/location tracking",
+        "Operational status monitoring",
+        "Alert and response support",
+        "Central monitoring dashboard",
+        "Mobile-friendly interface",
+        "Location data management",
+        "Scalable cloud-based architecture",
+      ],
+      role: "System concept and architecture, mobile/web workflow design, GPS integration, database design, frontend/backend development, testing, and deployment.",
+      technology: [
+        "JavaScript",
+        "Firebase",
+        "GPS / Geolocation",
+        "Leaflet",
+        "Mobile Web",
+        "Real-Time Monitoring",
+      ],
+      category: "fullstack",
     },
     {
-      title: "Digital Records & Document Tracking",
-      subtitle: "Electronic Document Management",
-      description:
-        "Electronic document tracking, searchable records, digital storage, and administrative reporting platform.",
-      tech: ["PHP", "MySQL", "Document Management"],
-      liveUrl: "",
-      githubUrl: "",
+      id: "patrollers-mobile",
+      title: "PATROLLERS Mobile",
+      subtitle: "GPS Field Reporting Mobile Application",
+      shortDescription:
+        "Mobile app component for real-time GPS location reporting and field patrol operations.",
+      overview:
+        "PATROLLERS Mobile is the field operations component of the PATROLLERS platform, enabling deployed personnel to report GPS location data in real time from mobile devices. It supports coordinated patrol monitoring, operational visibility, and response workflows through a mobile-first interface connected to the central monitoring dashboard.",
+      features: [
+        "Real-time GPS location reporting",
+        "Mobile patrol status updates",
+        "Field personnel location transmission",
+        "Operational activity logging",
+        "Mobile-friendly responsive interface",
+        "Cloud-synced location data",
+        "Integration with central monitoring map",
+        "Secure authenticated access",
+      ],
+      role: "Mobile workflow design, GPS integration, UI development, Firebase integration, testing, and deployment support.",
+      technology: [
+        "Flutter",
+        "Dart",
+        "Firebase",
+        "GPS / Geolocation",
+        "Mobile Development",
+      ],
+      category: "mobile",
     },
-  ],
+    {
+      id: "digital-records",
+      title: "Digital Records & Document Tracking",
+      subtitle: "Electronic Document Management and Tracking Platform",
+      shortDescription:
+        "Digital records and document tracking solution for organized, searchable electronic workflows.",
+      overview:
+        "A digital records and document tracking solution designed to transform traditional paper-based document workflows into an organized and searchable electronic records environment. The platform supports document registration, digital storage, tracking, retrieval, and administrative monitoring to improve efficiency and records accountability.",
+      features: [
+        "Electronic document registration",
+        "Digital file storage",
+        "Searchable document database",
+        "Document tracking",
+        "QR-enabled tracking capability",
+        "Records categorization",
+        "User access management",
+        "Status monitoring",
+        "Administrative reporting",
+        "Document history and audit information",
+      ],
+      role: "System analysis, workflow design, database development, user-interface development, testing, and implementation.",
+      technology: [
+        "PHP",
+        "MySQL",
+        "JavaScript",
+        "Document Management",
+        "QR Technology",
+      ],
+      category: "web",
+    },
+  ] satisfies Project[],
   experience: [
     {
       role: "ICT Project Developer / IT Professional",

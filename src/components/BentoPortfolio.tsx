@@ -3,17 +3,16 @@ import {
   Award,
   BrainCircuit,
   Briefcase,
-  Download,
   FolderKanban,
   GraduationCap,
-  Mail,
   MapPin,
-  Phone,
   Sparkles,
   Wrench,
 } from "lucide-react";
 import { profile } from "@/data/profile";
 import { ProfileRating } from "./ProfileRating";
+import { SelectedProjects } from "./SelectedProjects";
+import { SidebarActions } from "./SidebarActions";
 
 function Card({
   children,
@@ -139,25 +138,15 @@ export function BentoPortfolio() {
               </p>
             </div>
 
-            <div className="mt-5 space-y-2.5 border-t border-white/10 pt-5 text-sm text-slate-300">
+            <div className="mt-5 border-t border-white/10 pt-5 text-sm text-slate-300">
               <p className="flex items-center gap-2.5">
                 <MapPin className="h-4 w-4 shrink-0 text-emerald-400" />
                 {profile.location} · {profile.timezone.replace(" — ", " · ")}
               </p>
-              <a
-                href={`mailto:${profile.email}`}
-                className="flex items-center gap-2.5 break-all transition-colors hover:text-emerald-300"
-              >
-                <Mail className="h-4 w-4 shrink-0 text-emerald-400" />
-                {profile.email}
-              </a>
-              <a
-                href={`tel:${profile.phone}`}
-                className="flex items-center gap-2.5 transition-colors hover:text-emerald-300"
-              >
-                <Phone className="h-4 w-4 shrink-0 text-emerald-400" />
-                {profile.phone}
-              </a>
+              <p className="mt-2.5 text-xs leading-relaxed text-slate-500">
+                Contact details are shared privately through the Contact Me
+                form.
+              </p>
             </div>
 
             <ProfileRating />
@@ -182,23 +171,11 @@ export function BentoPortfolio() {
               </div>
             </div>
 
-            <div className="mt-auto flex flex-col gap-2.5 pt-5">
-              <a
-                href={`mailto:${profile.email}`}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-lg shadow-emerald-500/25 transition-all duration-300 hover:scale-[1.03] hover:bg-emerald-400 hover:shadow-emerald-400/40"
-              >
-                <Mail className="h-4 w-4" />
-                Contact Me
-              </a>
-              <a
-                href={profile.resumeUrl}
-                download
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:scale-[1.03] hover:border-emerald-500/30 hover:bg-white/10"
-              >
-                <Download className="h-4 w-4" />
-                Download Resume
-              </a>
-            </div>
+            <SidebarActions
+              email={profile.email}
+              resumeUrl={profile.resumeUrl}
+              githubUrl={profile.social.github || undefined}
+            />
           </Card>
 
           {/* Main content — Profile, Education + Certs side by side, Skills full width */}
@@ -342,37 +319,7 @@ export function BentoPortfolio() {
             <CardTitle icon={<FolderKanban className="h-3.5 w-3.5" />}>
               Selected Projects
             </CardTitle>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-              {profile.projects.map((project, index) => (
-                <article
-                  key={project.title}
-                  className="animate-fade-up group flex flex-col rounded-xl border border-white/10 bg-white/[0.03] p-4 transition-all duration-300 hover:-translate-y-1.5 hover:border-emerald-500/30 hover:bg-emerald-500/[0.05] hover:shadow-lg hover:shadow-emerald-500/10"
-                  style={{ animationDelay: `${600 + index * 80}ms` }}
-                >
-                  <h3 className="text-sm font-semibold text-white transition-colors group-hover:text-emerald-300">
-                    {project.title}
-                  </h3>
-                  {project.subtitle && (
-                    <p className="mt-0.5 text-[11px] font-medium leading-snug text-emerald-400/80">
-                      {project.subtitle}
-                    </p>
-                  )}
-                  <p className="mt-2 flex-1 text-xs leading-relaxed text-slate-400">
-                    {project.description}
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-1">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-300 transition-colors group-hover:bg-emerald-500/20"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
+            <SelectedProjects projects={profile.projects} />
           </Card>
 
         </div>
