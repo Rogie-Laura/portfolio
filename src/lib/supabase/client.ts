@@ -7,12 +7,8 @@ export function createBrowserClient() {
   return createClient(supabaseUrl, supabaseAnonKey);
 }
 
-export type Review = {
+export type Rating = {
   id: string;
-  reviewer_name: string;
-  relationship: string;
-  project_name: string | null;
   rating: number;
-  message: string;
   created_at: string;
 };

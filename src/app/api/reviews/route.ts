@@ -16,18 +16,22 @@ export async function GET() {
   try {
     const supabase = getSupabase();
     const { data, error } = await supabase
-      .from("portfolio_reviews")
-      .select("*")
-      .order("created_at", { ascending: false });
+      .from("portfolio_ratings")
+      .select("rating");
 
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json({ reviews: data ?? [] });
+    const ratings = data ?? [];
+    const total = ratings.length;
+    const totalStars = ratings.reduce((sum, row) => sum + row.rating, 0);
+    const average = total > 0 ? totalStars / total : 0;
+
+    return NextResponse.json({ average, total, totalStars });
   } catch {
     return NextResponse.json(
-      { error: "Reviews are not configured yet." },
+      { error: "Ratings are not configured yet." },
       { status: 503 },
     );
   }
@@ -36,25 +40,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const reviewerName = String(body.reviewerName ?? "").trim();
-    const relationship = String(body.relationship ?? "").trim();
-    const projectName = String(body.projectName ?? "").trim();
-    const message = String(body.message ?? "").trim();
     const rating = Number(body.rating);
-
-    if (!reviewerName || reviewerName.length < 2) {
-      return NextResponse.json(
-        { error: "Please enter your name." },
-        { status: 400 },
-      );
-    }
-
-    if (!relationship) {
-      return NextResponse.json(
-        { error: "Please select your relationship." },
-        { status: 400 },
-      );
-    }
 
     if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
       return NextResponse.json(
@@ -63,34 +49,19 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!message || message.length < 10) {
-      return NextResponse.json(
-        { error: "Please write at least 10 characters in your message." },
-        { status: 400 },
-      );
-    }
-
     const supabase = getSupabase();
-    const { data, error } = await supabase
-      .from("portfolio_reviews")
-      .insert({
-        reviewer_name: reviewerName,
-        relationship,
-        project_name: projectName || null,
-        rating,
-        message,
-      })
-      .select()
-      .single();
+    const { error } = await supabase
+      .from("portfolio_ratings")
+      .insert({ rating });
 
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json({ review: data }, { status: 201 });
+    return NextResponse.json({ ok: true }, { status: 201 });
   } catch {
     return NextResponse.json(
-      { error: "Could not submit review." },
+      { error: "Could not submit rating." },
       { status: 503 },
     );
   }
