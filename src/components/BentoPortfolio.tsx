@@ -108,11 +108,10 @@ export function BentoPortfolio() {
 
       <div className="relative mx-auto max-w-6xl">
         <div className="grid gap-4 lg:grid-cols-12">
-          {/* Left column: Profile + Education + Certificates */}
-          <div className="flex flex-col gap-4 lg:col-span-4">
+          {/* Left sidebar — profile only */}
           <Card
             delay={0}
-            className="flex flex-col bg-gradient-to-br from-emerald-500/[0.08] to-cyan-500/[0.04]"
+            className="flex flex-col self-start bg-gradient-to-br from-emerald-500/[0.08] to-cyan-500/[0.04] lg:col-span-4"
           >
             <div className="flex flex-col items-center text-center">
               <div className="animate-ring-pulse relative h-28 w-28 overflow-hidden rounded-full border-4 border-emerald-500/40 shadow-lg shadow-emerald-500/20 transition-transform duration-300 hover:scale-105">
@@ -197,53 +196,7 @@ export function BentoPortfolio() {
             </div>
           </Card>
 
-          <Card delay={150} className="p-4">
-            <CardTitle icon={<GraduationCap className="h-3.5 w-3.5" />}>
-              Educational Background
-            </CardTitle>
-            <div className="space-y-2">
-              {profile.education.map((item) => (
-                <div
-                  key={`${item.degree}-${item.school}`}
-                  className="rounded-lg border border-white/10 bg-white/[0.03] p-2.5 transition-colors hover:border-emerald-500/20"
-                >
-                  <p className="text-[10px] font-semibold text-emerald-400">
-                    {item.period}
-                  </p>
-                  <p className="mt-0.5 text-[11px] font-medium leading-snug text-white">
-                    {item.degree}
-                  </p>
-                  <p className="mt-0.5 text-[10px] leading-snug text-slate-400">
-                    {item.school}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </Card>
-
-          <Card delay={200} className="p-4">
-            <CardTitle icon={<Award className="h-3.5 w-3.5" />}>
-              Certificates and Trainings
-            </CardTitle>
-            <ul className="space-y-2">
-              {profile.certificates.map((item) => (
-                <li
-                  key={`${item.title}-${item.institution}`}
-                  className="rounded-lg border border-white/10 bg-white/[0.03] p-2.5 transition-colors hover:border-emerald-500/20"
-                >
-                  <p className="text-[11px] font-medium leading-snug text-white">
-                    {item.title}
-                  </p>
-                  <p className="mt-0.5 text-[10px] text-slate-400">
-                    {item.institution}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </Card>
-          </div>
-
-          {/* About */}
+          {/* Profile */}
           <Card delay={100} className="lg:col-span-8">
             <CardTitle icon={<Sparkles className="h-3.5 w-3.5" />}>
               Profile
@@ -255,8 +208,55 @@ export function BentoPortfolio() {
             </div>
           </Card>
 
-          {/* Skills */}
+          {/* Educational Background */}
+          <Card delay={150} className="lg:col-span-8">
+            <CardTitle icon={<GraduationCap className="h-3.5 w-3.5" />}>
+              Educational Background
+            </CardTitle>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {profile.education.map((item) => (
+                <div
+                  key={`${item.degree}-${item.school}`}
+                  className="rounded-xl border border-white/10 bg-white/[0.03] p-3 transition-colors hover:border-emerald-500/20"
+                >
+                  <p className="text-xs font-semibold text-emerald-400">
+                    {item.period}
+                  </p>
+                  <p className="mt-1 text-sm font-medium leading-snug text-white">
+                    {item.degree}
+                  </p>
+                  <p className="mt-1 text-xs leading-snug text-slate-400">
+                    {item.school}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          {/* Certificates and Trainings */}
           <Card delay={200} className="lg:col-span-8">
+            <CardTitle icon={<Award className="h-3.5 w-3.5" />}>
+              Certificates and Trainings
+            </CardTitle>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {profile.certificates.map((item) => (
+                <div
+                  key={`${item.title}-${item.institution}`}
+                  className="rounded-xl border border-white/10 bg-white/[0.03] p-3 transition-colors hover:border-emerald-500/20"
+                >
+                  <p className="text-sm font-medium leading-snug text-white">
+                    {item.title}
+                  </p>
+                  <p className="mt-1 text-xs text-slate-400">
+                    {item.institution}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          {/* Skills */}
+          <Card delay={250} className="lg:col-span-8">
             <CardTitle icon={<Wrench className="h-3.5 w-3.5" />}>
               Skills
             </CardTitle>
