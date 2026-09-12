@@ -34,8 +34,8 @@ export const profile = {
     linkedin: "",
   },
   about: [
-    "Detail-oriented IT professional and software developer with practical experience in data management, web-based information systems, digital records, database administration, and AI-assisted workflows. Experienced in structured data, spreadsheets, web research, verification, quality checking, and reviewing AI-generated outputs.",
-    "Able to work independently, follow detailed instructions, learn new platforms quickly, and deliver accurate and organized results. Combines software development experience with strong attention to detail for data entry, research, AI evaluation, quality assurance, and remote support.",
+    "Detail-oriented IT professional and software developer with practical experience in data management, web-based information systems, digital records, database administration, and AI-assisted workflows. Experienced in developing custom web and mobile applications, SaaS solutions, database-driven systems, dashboards, and real-time monitoring applications tailored to organizational and operational requirements. Also experienced in structured data, spreadsheets, web research, verification, quality checking, and reviewing AI-generated outputs.",
+    "Able to work independently, follow detailed instructions, learn new platforms quickly, and deliver accurate and organized results. Combines software development experience with strong attention to detail for data entry, research, AI evaluation, software and application testing, quality assurance, and remote support.",
   ],
   skills: [
     {
