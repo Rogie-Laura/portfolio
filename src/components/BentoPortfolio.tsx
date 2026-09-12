@@ -10,6 +10,7 @@ import {
   MapPin,
   Phone,
   Sparkles,
+  Star,
   Wrench,
 } from "lucide-react";
 import { profile } from "@/data/profile";
@@ -64,6 +65,50 @@ function RoleBadges({
           ))}
         </div>
       ))}
+    </div>
+  );
+}
+
+function StarRating({ rating, max = 5 }: { rating: number; max?: number }) {
+  return (
+    <div className="flex items-center gap-0.5" aria-label={`${rating} out of ${max} stars`}>
+      {Array.from({ length: max }, (_, index) => (
+        <Star
+          key={index}
+          className={`h-3.5 w-3.5 ${
+            index < rating
+              ? "fill-emerald-400 text-emerald-400"
+              : "fill-transparent text-slate-600"
+          }`}
+        />
+      ))}
+    </div>
+  );
+}
+
+function SkillRatingRow({
+  name,
+  rating,
+}: {
+  name: string;
+  rating: number;
+}) {
+  const percent = (rating / 5) * 100;
+
+  return (
+    <div className="group">
+      <div className="mb-1 flex items-center justify-between gap-2">
+        <span className="text-xs text-slate-300 transition-colors group-hover:text-emerald-300">
+          {name}
+        </span>
+        <StarRating rating={rating} />
+      </div>
+      <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
+        <div
+          className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-cyan-400 transition-all duration-700"
+          style={{ width: `${percent}%` }}
+        />
+      </div>
     </div>
   );
 }
@@ -258,24 +303,26 @@ export function BentoPortfolio() {
 
             <Card delay={250}>
               <CardTitle icon={<Wrench className="h-3.5 w-3.5" />}>
-                Skills
+                Skills & Proficiency
               </CardTitle>
-              <div className="grid gap-4 sm:grid-cols-3">
-                {profile.skills.map((group) => (
+              <p className="mb-4 text-xs text-slate-500">
+                Self-assessed ratings — scale of 1 to 5 stars
+              </p>
+              <div className="grid gap-5 sm:grid-cols-3">
+                {profile.skillRatings.map((group) => (
                   <div key={group.category}>
-                    <h3 className="mb-2 text-xs font-semibold text-slate-300">
+                    <h3 className="mb-3 text-xs font-semibold uppercase tracking-wide text-emerald-400/90">
                       {group.category}
                     </h3>
-                    <ul className="flex flex-wrap gap-1.5">
-                      {group.items.map((skill) => (
-                        <li
-                          key={skill}
-                          className="cursor-default rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs text-slate-300 transition-all duration-200 hover:scale-105 hover:border-emerald-500/40 hover:bg-emerald-500/10 hover:text-emerald-300"
-                        >
-                          {skill}
-                        </li>
+                    <div className="space-y-3">
+                      {group.items.map((item) => (
+                        <SkillRatingRow
+                          key={item.name}
+                          name={item.name}
+                          rating={item.rating}
+                        />
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 ))}
               </div>
