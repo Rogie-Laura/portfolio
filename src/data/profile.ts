@@ -132,20 +132,32 @@ export const profile = {
     {
       period: "2000 — 2002",
       degree: "Associate in Computer Technology",
+      school: "Cavite State University Rosario Campus",
     },
     {
       period: "2002 — 2005",
       degree: "BS in Computer Engineering",
+      school: "San Sebastian College Recoletos de Cavite",
     },
     {
-      period: "2006 — 2010",
+      period: "2005 — 2009",
       degree: "BS in Computer Science",
+      school: "STI College Bacoor",
     },
   ],
   certificates: [
-    "Basic and Advance Java Programming",
-    "Computer Ethical Hacking and Penetration Testing",
-    "Certified Google IT Support",
+    {
+      title: "Basic and Advance Java Programming",
+      institution: "Informatics Cavite",
+    },
+    {
+      title: "Computer Ethical Hacking and Penetration Testing",
+      institution: "NEXXUS IT Training Center",
+    },
+    {
+      title: "Certified Google IT Support",
+      institution: "Coursera",
+    },
   ],
   dataAiCapabilities: [
     "Review structured and unstructured information against defined requirements.",
