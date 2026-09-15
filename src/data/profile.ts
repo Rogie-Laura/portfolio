@@ -8,10 +8,13 @@ export type Project = {
   features: string[];
   role: string;
   technology: string[];
-  category: "web" | "mobile" | "fullstack";
+  category: "web" | "mobile" | "fullstack" | "saas";
   screenshots?: string[];
   liveUrl?: string;
   githubUrl?: string;
+  qrCodeUrl?: string;
+  apkDownloadUrl?: string;
+  installNote?: string;
 };
 
 export const profile = {
@@ -81,6 +84,46 @@ export const profile = {
     },
   ],
   projects: [
+    {
+      id: "pinoy-up",
+      title: "Pinoy-Up",
+      subtitle: "Forex Scalping SaaS — Mobile App",
+      shortDescription:
+        "Freemium forex signals app with Supabase auth, PayMongo subscriptions, and broker integration.",
+      overview:
+        "Pinoy-Up is a mobile-first SaaS platform for forex scalping signals, subscription plans (Free, Basic, Pro), and one-time boosts. Users connect brokers such as OANDA and Vantage, view plan-based technical indicators, and upgrade via GCash, QR Ph, or card through PayMongo. Built as a production-ready freemium product with Supabase backend, edge functions, and Flutter cross-platform client.",
+      purpose:
+        "Designed to deliver actionable trading signals with tiered access, ad-supported free tier, and monetization through subscriptions and in-app purchases for the Philippine market.",
+      features: [
+        "Freemium plans: Free, Basic, Pro with tiered indicators",
+        "PayMongo checkout — GCash, QR Ph, card (test mode)",
+        "Supabase auth with instant signup and profile sync",
+        "Boost shop — Pro Pass, Ad-Free, Extra Pair slots",
+        "OANDA Practice/Live API integration",
+        "Vantage MT4/MT5 via MetaApi",
+        "Unity rewarded ads for free-tier unlock",
+        "Single-device session guard",
+        "Real-time signal cards with blur/ad gate on Free plan",
+      ],
+      role: "Product design, Supabase schema, PayMongo integration, edge functions, Flutter mobile app, testing, and deployment.",
+      technology: [
+        "Flutter",
+        "Dart",
+        "Supabase",
+        "PostgreSQL",
+        "PayMongo",
+        "Edge Functions",
+        "OANDA API",
+        "MetaApi",
+        "Unity Ads",
+      ],
+      category: "saas",
+      screenshots: ["/projects/pinoyup-logo.png"],
+      apkDownloadUrl: "/projects/pinoyup-release.apk",
+      qrCodeUrl: "/projects/pinoyup-install-qr.png",
+      installNote:
+        "Android test build. Scan the QR code or tap Download APK. Enable “Install unknown apps” if prompted. iOS coming later via TestFlight.",
+    },
     {
       id: "cframe",
       title: "CFRAME",

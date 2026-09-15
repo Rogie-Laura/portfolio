@@ -1,11 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
+  Download,
   FolderKanban,
   Layers,
   MapPin,
+  QrCode,
   Smartphone,
+  Sparkles,
   User,
   Wrench,
   X,
@@ -18,6 +21,7 @@ function CategoryBadge({ category }: { category: Project["category"] }) {
     web: { label: "Web App", icon: Layers, className: "text-cyan-300 bg-cyan-500/10 border-cyan-500/20" },
     mobile: { label: "Mobile App", icon: Smartphone, className: "text-violet-300 bg-violet-500/10 border-violet-500/20" },
     fullstack: { label: "Web + Mobile", icon: MapPin, className: "text-emerald-300 bg-emerald-500/10 border-emerald-500/20" },
+    saas: { label: "SaaS", icon: Sparkles, className: "text-amber-300 bg-amber-500/10 border-amber-500/20" },
   }[category];
 
   const Icon = config.icon;
@@ -43,6 +47,70 @@ function ScreenshotPlaceholder({ title }: { title: string }) {
         </p>
       </div>
     </div>
+  );
+}
+
+function AppInstallSection({ project }: { project: Project }) {
+  const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!project.apkDownloadUrl) return;
+    setDownloadUrl(`${window.location.origin}${project.apkDownloadUrl}`);
+  }, [project.apkDownloadUrl]);
+
+  if (!project.apkDownloadUrl && !project.qrCodeUrl) return null;
+
+  const qrSrc =
+    downloadUrl &&
+    `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(downloadUrl)}`;
+
+  return (
+    <section className="mt-5 rounded-xl border border-amber-500/20 bg-amber-500/[0.06] p-4">
+      <h4 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-amber-300">
+        <QrCode className="h-3.5 w-3.5" />
+        Install Android App
+      </h4>
+      {project.installNote && (
+        <p className="mt-2 text-sm leading-relaxed text-slate-300">
+          {project.installNote}
+        </p>
+      )}
+      <div className="mt-4 flex flex-col items-center gap-4 sm:flex-row sm:items-start">
+        {qrSrc && (
+          <div className="rounded-xl border border-white/10 bg-white p-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={qrSrc}
+              alt={`${project.title} install QR code`}
+              className="h-36 w-36 object-contain"
+            />
+            <p className="mt-2 text-center text-[10px] font-medium text-slate-600">
+              Scan to download
+            </p>
+          </div>
+        )}
+        {project.apkDownloadUrl && (
+          <div className="flex flex-col gap-2 sm:pt-2">
+            <a
+              href={project.apkDownloadUrl}
+              download
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-emerald-500/30 bg-emerald-500/15 px-4 py-2.5 text-sm font-semibold text-emerald-300 transition-colors hover:border-emerald-400/50 hover:bg-emerald-500/25"
+            >
+              <Download className="h-4 w-4" />
+              Download APK
+            </a>
+            {downloadUrl && (
+              <p className="max-w-xs break-all text-[10px] leading-relaxed text-slate-500">
+                {downloadUrl}
+              </p>
+            )}
+            <p className="max-w-xs text-xs leading-relaxed text-slate-400">
+              Direct download for Android phones. Test build — not yet on Play Store.
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
 
@@ -171,6 +239,10 @@ function ProjectDetailModal({
               ))}
             </div>
           </section>
+
+          {(project.qrCodeUrl || project.apkDownloadUrl) && (
+            <AppInstallSection project={project} />
+          )}
         </div>
       </div>
     </Modal>
