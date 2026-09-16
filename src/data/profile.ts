@@ -357,6 +357,10 @@ export const profile = {
       title: "Certified Google IT Support",
       institution: "Coursera",
     },
+    {
+      title: "Digital Forensic",
+      institution: "National Forensic Science Training Institute",
+    },
   ],
   dataAiCapabilities: [
     "Review structured and unstructured information against defined requirements.",
