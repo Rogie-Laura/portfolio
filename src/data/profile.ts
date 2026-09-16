@@ -125,6 +125,39 @@ export const profile = {
         "Android test build. Scan the QR code or tap Download APK. Enable “Install unknown apps” if prompted. iOS coming later via TestFlight.",
     },
     {
+      id: "pinoy-stocks",
+      title: "PinoyStocks",
+      subtitle: "Inventory System with POS — SaaS",
+      shortDescription:
+        "Cloud-based inventory and point-of-sale platform for product tracking, sales, and store operations.",
+      overview:
+        "PinoyStocks is a SaaS inventory management system with an integrated point-of-sale (POS) module designed to help businesses track stock levels, process sales, and monitor store activity from a centralized web platform. It combines product catalog management, real-time inventory updates, and checkout workflows in one organized system.",
+      purpose:
+        "Built to replace manual stock lists and disconnected cash registers with a single digital platform that improves stock accuracy, sales recording, and day-to-day store accountability.",
+      features: [
+        "Product catalog and SKU management",
+        "Stock in / stock out tracking",
+        "Low-stock alerts and inventory levels",
+        "Integrated POS checkout",
+        "Sales transactions and receipts",
+        "Daily sales summary and reporting",
+        "User roles and access control",
+        "Searchable inventory records",
+        "Dashboard for store overview",
+      ],
+      role: "System design, database structure, inventory and POS workflow development, UI implementation, testing, and deployment.",
+      technology: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Supabase",
+        "PostgreSQL",
+        "SaaS",
+        "POS",
+      ],
+      category: "saas",
+    },
+    {
       id: "cframe",
       title: "CFRAME",
       subtitle:
