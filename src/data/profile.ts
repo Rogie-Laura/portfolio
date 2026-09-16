@@ -358,8 +358,12 @@ export const profile = {
       institution: "Coursera",
     },
     {
-      title: "Digital Forensic",
+      title: "Digital Forensic Investigation Course",
       institution: "National Forensic Science Training Institute",
+    },
+    {
+      title: "Introduction to Cyber Crime Investigation",
+      institution: "PNP - Anti Cyber Crime Group",
     },
   ],
   dataAiCapabilities: [
