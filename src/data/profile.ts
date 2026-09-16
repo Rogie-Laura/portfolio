@@ -8,7 +8,7 @@ export type Project = {
   features: string[];
   role: string;
   technology: string[];
-  category: "web" | "mobile" | "fullstack" | "saas";
+  category: "web" | "mobile" | "fullstack" | "saas" | "desktop";
   screenshots?: string[];
   liveUrl?: string;
   githubUrl?: string;
@@ -156,6 +156,40 @@ export const profile = {
         "POS",
       ],
       category: "saas",
+    },
+    {
+      id: "project-sentry",
+      title: "SENTRY",
+      subtitle: "Project Sentry — Custom OSINT Desktop Console",
+      shortDescription:
+        "Windows desktop app for lawful public-source research, verification, assessment, and documented analyst workflows.",
+      overview:
+        "SENTRY (Safety Early-warning Network for Threat Review and Cyber-monitoring) is a custom desktop OSINT and public-safety analyst console built for structured cyber patrolling using publicly accessible information. It combines keyword-driven search planning, browser-based public queries, manual result capture, human verification, assessment, case tracking, referrals, and audit logging in a single secure Windows application.",
+      purpose:
+        "Designed to support authorized analysts with a disciplined workflow: observe what is lawfully accessible, detect indicators (not people), verify before assessing, assess before escalating, and record only what is necessary — with full accountability through RBAC and audit trails.",
+      features: [
+        "Dark analyst UI with login, session lock, and role-based access",
+        "OSINT search panel with keyword library and query builder",
+        "Public browser search with required search purpose logging",
+        "Manual result entry and duplicate detection",
+        "Assessment panel and case management workflow",
+        "Supervisor referrals and approval workflow",
+        "CSV reports (patrolling, cases, indicators, referrals, audit)",
+        "Audit trail, user management, and encrypted backups",
+        "Saved search profiles, analytics, and in-app notifications",
+        "Privacy notice and authorized-use policy enforcement",
+      ],
+      role: "Product concept, system architecture, database design, security and RBAC, desktop UI/UX (PySide6), OSINT workflow implementation, testing, and deployment packaging.",
+      technology: [
+        "Python",
+        "PySide6 (Qt)",
+        "SQLAlchemy",
+        "SQLite",
+        "OSINT Workflows",
+        "RBAC & Audit Logging",
+        "Windows Desktop",
+      ],
+      category: "desktop",
     },
     {
       id: "cframe",

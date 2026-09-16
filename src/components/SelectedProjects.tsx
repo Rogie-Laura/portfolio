@@ -6,6 +6,7 @@ import {
   FolderKanban,
   Layers,
   MapPin,
+  Monitor,
   QrCode,
   Smartphone,
   Sparkles,
@@ -22,6 +23,7 @@ function CategoryBadge({ category }: { category: Project["category"] }) {
     mobile: { label: "Mobile App", icon: Smartphone, className: "text-violet-300 bg-violet-500/10 border-violet-500/20" },
     fullstack: { label: "Web + Mobile", icon: MapPin, className: "text-emerald-300 bg-emerald-500/10 border-emerald-500/20" },
     saas: { label: "SaaS", icon: Sparkles, className: "text-amber-300 bg-amber-500/10 border-amber-500/20" },
+    desktop: { label: "Desktop App", icon: Monitor, className: "text-sky-300 bg-sky-500/10 border-sky-500/20" },
   }[category];
 
   const Icon = config.icon;
